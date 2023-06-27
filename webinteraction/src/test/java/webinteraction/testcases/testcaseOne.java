@@ -55,15 +55,27 @@ public class testcaseOne {
 //
 //	}
 	@Test
-	public void textBoxTest() {
+	public void loginTest() {
 		bs.goTo("https://demoqa.com/checkbox");
 		bs.click(By.xpath("//span[contains(text(),'Text Box')]"));
-		bs.takeScreenshot();
+		//bs.takeScreenshot();
 		bs.enterText(By.id("userName"), "mohammad ikram");
 		bs.enterText(By.id("userEmail"), "mohdikram0410@gmail.com");
 		bs.enterText(By.id("currentAddress"), "39 sixth street New Westminster");
 		bs.enterText(By.id("permanentAddress"), "39 sixth street New Westminster");
+		bs.scroll(By.xpath("//button[@id='submit']"));
 		bs.click(By.xpath("//button[@id='submit']"));
+		bs.takeScreenshot();
+		bs.quit();
+	}
+	
+	public void checkBox() {
+		bs.goTo("https://demoqa.com/checkbox");
+		bs.click(By.xpath("//span[contains(text(),'Check Box')]"));
+		//bs.takeScreenshot();
+		bs.click(By.xpath("//button[@title='Toggle']"));
+		bs.
+		bs.takeScreenshot();
 	}
 
 }
