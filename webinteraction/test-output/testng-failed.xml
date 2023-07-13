@@ -5,8 +5,9 @@
     <classes>
       <class name="webinteraction.testcases.testcaseOne">
         <methods>
-          <include name="textBoxTest"/>
-          <include name="beforeTest"/>
+          <include name="setup"/>
+          <include name="quit"/>
+          <include name="loginTest"/>
         </methods>
       </class> <!-- webinteraction.testcases.testcaseOne -->
     </classes>

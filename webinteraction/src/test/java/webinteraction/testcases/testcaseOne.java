@@ -1,7 +1,11 @@
 package webinteraction.testcases;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
+import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,71 +15,48 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import webinteraction.base.pages.basePageClass;
 
-public class testcaseOne {
+import webinteraction.base.pages.basePageClass;
+import webinteraction.pages.normal.CartPage;
+import webinteraction.pages.normal.InventoryPage;
+import webinteraction.pages.normal.LoginPage;
+
+public class testcaseOne extends basePageClass {
 	
-	basePageClass bs;
-	
-	@BeforeMethod
-	public void beforeTest() {
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		bs = new basePageClass(driver);
-	}
-	
-//	@Test
-//	public void dummyTest() {
-//		//bs.goTo("https://demoqa.com/checkbox");
-//		
-//		//Navigate function enbles us to move forweard or backward
-////		driver.navigate().to("https://demoqa.com/");
-////		driver.navigate().back();
-////		driver.navigate().forward();
-////		driver.navigate().refresh();
-//		
-//		//Handle webelements under webelements
-////		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-////		WebElement elements = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='category-cards']//h5[contains(text(), 'Elements')]")));
-////		System.out.println(elements);
-////		elements.click();
-////		Actions action = new Actions(driver);
-////		action.click(elements).perform();
-//		
-//		//TextBoxPractice
-////		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-////		WebElement textBox = wait.until(ExpectedConditions.visibilityOfElementLocated();
-////		textBox.click();
-//		
-//		
-//
-//	}
 	@Test
 	public void loginTest() {
-		bs.goTo("https://demoqa.com/checkbox");
-		bs.click(By.xpath("//span[contains(text(),'Text Box')]"));
-		//bs.takeScreenshot();
-		bs.enterText(By.id("userName"), "mohammad ikram");
-		bs.enterText(By.id("userEmail"), "mohdikram0410@gmail.com");
-		bs.enterText(By.id("currentAddress"), "39 sixth street New Westminster");
-		bs.enterText(By.id("permanentAddress"), "39 sixth street New Westminster");
-		bs.scroll(By.xpath("//button[@id='submit']"));
-		bs.click(By.xpath("//button[@id='submit']"));
-		bs.takeScreenshot();
-		bs.quit();
+		String productName = reader.getCellData("testData1", "productName", 2);
+		String productDes = reader.getCellData("testData1", "productDes", 2);
+		String productPrice = reader.getCellData("testData1", "productPrice", 2);
+		System.out.println(productName+" - "+productPrice);
+		
+		driver.get("https://www.saucedemo.com/");
+		
+		LoginPage lp = new LoginPage(driver);
+		lp.enterUsername();
+		lp.enterPassword();
+		lp.clickSubmit();
+		
+		takeScreenshot();
+		
+		InventoryPage ip = new InventoryPage(driver);
+		ip.validateTitle();
+		ip.addItem("Sauce Labs Backpack");
+		ip.validateHamburger();
+		ip.validateCartIcon("1");
+		ip.validateFilter();
+		ip.goToCartPage();
+		
+		
+		
+		CartPage cp = new CartPage(driver);
+		cp.validateTitle();
+		takeScreenshot();
+		
 	}
-	
-	public void checkBox() {
-		bs.goTo("https://demoqa.com/checkbox");
-		bs.click(By.xpath("//span[contains(text(),'Check Box')]"));
-		//bs.takeScreenshot();
-		bs.click(By.xpath("//button[@title='Toggle']"));
-		bs.
-		bs.takeScreenshot();
-	}
-
 }
